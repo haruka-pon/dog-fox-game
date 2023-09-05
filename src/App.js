@@ -171,11 +171,14 @@ class App extends Component {
           <p>正解数: {correctCount}</p>
               <ul
               style={{
-                textAlign:'right',
+                // textAlign:'right',
+                textAlign:'center',
                 listStyle:'none',
                 position:'absolute',
-                top:'0',
+                // top:'0',
                 right:'0',
+                bottom:'0',
+                // left:'0',
                 marginRight:'20px',
               }} >
                 <p>ランキング</p>
