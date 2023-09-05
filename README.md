@@ -1,4 +1,4 @@
-[dog fox game をプレイ]([https://facebook.github.io/create-react-app/docs/running-test](https://dog-fox-game.vercel.app/)s)
+[dog fox game をプレイ](https://dog-fox-game.vercel.app/)
 
 
 
