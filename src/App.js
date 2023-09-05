@@ -169,17 +169,34 @@ class App extends Component {
             />
           ))}
           <p>正解数: {correctCount}</p>
+              
+          <p>{answer}</p>
+          {gameOver && (
+            <div>
+              <button
+                onClick={this.restartGame}
+                className="btn restart-button"
+              >
+                リスタート
+              </button>
               <ul
               style={{
+                width:'100px',
+                display:'flex',
+                justifyContent:'center',
+                flexWrap:'wrap',
+                margin:'30px auto 0 auto',
                 // textAlign:'right',
-                textAlign:'center',
+                // textAlign:'center',
                 listStyle:'none',
-                position:'absolute',
+                // position:'absolute',
                 // top:'0',
-                right:'0',
-                bottom:'0',
+                // right:'0',
+                // bottom:'0',
                 // left:'0',
-                marginRight:'20px',
+                // marginRight:'20px',
+                padding:'0',
+                
               }} >
                 <p>ランキング</p>
                 {rankings.slice(0, 5).map((score, index) => (
@@ -192,15 +209,6 @@ class App extends Component {
               </li>
                 ))}
               </ul>
-          <p>{answer}</p>
-          {gameOver && (
-            <div>
-              <button
-                onClick={this.restartGame}
-                className="btn restart-button"
-              >
-                リスタート
-              </button>
             </div>
           )}
         </div>
