@@ -1,27 +1,21 @@
 /* src/App.css */
 
-.App {
-  text-align: center;
-  margin: 20px;
+/* App.css */
+.btn--circle {
+  border-radius: 50%;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
+  padding: 0;
+  transition: 0.1s;
+  -webkit-box-shadow: 0 5px 0 #afafaf;
+  box-shadow: 0 5px 0 #afafaf;
+  border: solid 3px rgb(133, 133, 133);
 }
 
-
-.button-container {
-  width: 100%;
-  display: flex;
-  justify-content: center; /* ボタンを中央に配置 */
-  gap: 10px; /* ボタン間のスペース */
-}
-
-.frame-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 50%;
-  margin: 0 auto;
-  border: 2px solid #ccc;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  height: 400px; /* 額縁コンテナの高さを指定 */
+.btn--circle:active {
+  -webkit-transform: translate(0, 3px);
+  transform: translate(0, 3px);
+  -webkit-box-shadow: 0 0px 0 #afafaf;
+  box-shadow: 0 0px 0 #afafaf;
 }
