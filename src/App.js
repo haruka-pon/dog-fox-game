@@ -11,11 +11,18 @@ class App extends Component {
       correctCount: 0,
       gameOver: false, // ゲーム終了状態を管理
       correctImages: [], // 正解した画像の情報を保存
+      rankings: [], // ランキング情報を保存
     };
     this.isGameOver = false; // カウントを停止するフラグ
   }
 
   componentDidMount() {
+    // ローカルストレージからランキングを取得
+    const rankings = localStorage.getItem('rankings');
+    if (rankings) {
+      this.setState({ rankings: JSON.parse(rankings) });
+    }
+    
     this.fetchImage();
   }
 
@@ -63,6 +70,9 @@ class App extends Component {
   endGame = () => {
     this.isGameOver = true;
     this.setState({ gameOver: true });
+
+    // ゲーム終了時にランキングに追加
+    this.addToRankings();
   }
 
   restartGame = () => {
@@ -87,14 +97,25 @@ class App extends Component {
     this.setState({ correctImages });
   }
 
+  // ランキングに追加
+  addToRankings = () => {
+    const { correctCount, rankings } = this.state;
+    rankings.push(correctCount);
+    rankings.sort((a, b) => b - a); // ランキングを降順でソート
+    localStorage.setItem('rankings', JSON.stringify(rankings));
+    this.setState({ rankings });
+  }
+
   render() {
-    const { imageUrl, answer, correctCount, gameOver, correctImages } = this.state;
+    const { imageUrl, answer, correctCount, gameOver, correctImages, rankings } = this.state;
 
     return (
       <div className="App"
         style={{
           width: '100%',
-          textAlign: 'center'
+          height:'100vh',
+          textAlign: 'center',
+          overflow:'hidden',
         }}
       >
         <h1>犬 or 狐 ゲーム</h1>
@@ -148,14 +169,36 @@ class App extends Component {
             />
           ))}
           <p>正解数: {correctCount}</p>
+              <ul
+              style={{
+                textAlign:'right',
+                listStyle:'none',
+                position:'absolute',
+                top:'0',
+                right:'0',
+                marginRight:'20px',
+              }} >
+                <p>ランキング</p>
+                {rankings.slice(0, 5).map((score, index) => (
+                <li key={index}>
+                {index === 0 ? (
+                  <span style={{fontSize:'14px'}}>{index + 1}番： {score} 問</span>
+                ) : (
+                  <span style={{fontSize:'14px'}}>{index + 1}番： {score} 問</span>
+                )}
+              </li>
+                ))}
+              </ul>
           <p>{answer}</p>
           {gameOver && (
-            <button
-              onClick={this.restartGame}
-              className="btn restart-button"
-            >
-              リスタート
-            </button>
+            <div>
+              <button
+                onClick={this.restartGame}
+                className="btn restart-button"
+              >
+                リスタート
+              </button>
+            </div>
           )}
         </div>
       </div>
